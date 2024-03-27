@@ -3,7 +3,9 @@ package com.mexiti.navegacion.views
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -15,6 +17,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.mexiti.navegacion.components.MainButton
 import com.mexiti.navegacion.components.MainIconButton
@@ -26,7 +29,7 @@ import com.mexiti.navegacion.components.TitleView
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 
-fun DetailView(navController: NavController, id: Int){
+fun DetailView(navController: NavController, id: Int, opcional: String?){
     Scaffold(
         topBar = {
             TopAppBar(
@@ -43,14 +46,14 @@ fun DetailView(navController: NavController, id: Int){
         }
     ) {
 
-        ContentDetailView(navController = navController,id)
+        ContentDetailView(navController = navController,id, opcional)
     }
 
 }
 
 
 @Composable
-fun ContentDetailView(navController: NavController, id:Int){
+fun ContentDetailView(navController: NavController, id:Int, opcional:String?){
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
@@ -60,6 +63,12 @@ fun ContentDetailView(navController: NavController, id:Int){
         Space()
         TitleView(name = "id: $id")
         Space()
+        if ( opcional == ""){
+            Spacer(modifier = Modifier.height(0.dp))
+        }
+        else{
+            TitleView(name = opcional.orEmpty())
+        }
         MainButton(name = "HomeView", backColor = Color.Blue, color = Color.White ) {
             navController.popBackStack()
         }

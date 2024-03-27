@@ -16,14 +16,18 @@ fun NavManager(){
           composable("Home"){
               HomeView(navController)
           }
-          composable("Detail/{id}", arguments = listOf(
+          composable("Detail/{id}/?{opcional}", arguments = listOf(
               navArgument("id"){
                   type = NavType.IntType
               },
+              navArgument("opcional"){
+                  type = NavType.StringType
+              }
 
           )){
               val id = it.arguments?.getInt("id") ?: 0
-              DetailView(navController = navController,id)
+              val opcional = it.arguments?.getString("opcional") ?: ""
+              DetailView(navController = navController,id,opcional)
           }
       }
 }
