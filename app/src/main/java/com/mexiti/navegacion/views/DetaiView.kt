@@ -26,7 +26,7 @@ import com.mexiti.navegacion.components.TitleView
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 
-fun DetailView(navController: NavController){
+fun DetailView(navController: NavController, id: Int){
     Scaffold(
         topBar = {
             TopAppBar(
@@ -43,20 +43,22 @@ fun DetailView(navController: NavController){
         }
     ) {
 
-        ContentDetailView(navController = navController)
+        ContentDetailView(navController = navController,id)
     }
 
 }
 
 
 @Composable
-fun ContentDetailView(navController: NavController){
+fun ContentDetailView(navController: NavController, id:Int){
     Column(
         modifier = Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         TitleView(name = "Detail View")
+        Space()
+        TitleView(name = "id: $id")
         Space()
         MainButton(name = "HomeView", backColor = Color.Blue, color = Color.White ) {
             navController.popBackStack()
